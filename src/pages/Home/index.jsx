@@ -5,6 +5,7 @@ import {Col, Container, Row} from "reactstrap";
 import heroImg from '../../assets/images/hero-img.png'
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
+import Services from "../../components/services";
 
 const Home = () => {
     const year = new Date().getFullYear();
@@ -34,6 +35,8 @@ const Home = () => {
                     </Row>
                 </Container>
             </section>
+
+            <Services />
         </Helmet>
     );
 };
