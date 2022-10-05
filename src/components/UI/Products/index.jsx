@@ -6,7 +6,7 @@ const Products = ({data}) => {
     return (
         <>
             {
-                data.map((item) => <ProductCard key={item.id} item={item}/> )
+                data?.map((item) => <ProductCard key={item.id} item={item}/> )
             }
         </>
     );
