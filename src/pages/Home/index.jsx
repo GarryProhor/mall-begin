@@ -15,12 +15,18 @@ import Clock from "../../components/UI/CLock";
 const Home = () => {
     const [trendingProducts, setTrendingProducts] = useState([]);
     const [bestSalesProducts, setBestSalesProducts] = useState([]);
+    const [mobileProducts, setMobileProducts] = useState([]);
+    const [wirelessProducts, setWirelessProducts] = useState([]);
     const year = new Date().getFullYear();
     useEffect(()=>{
         const filteredTrendingProducts = products.filter(({category}) => category === 'chair');
         const filteredBestSalesProducts = products.filter(({category}) => category === 'sofa');
+        const filteredMobileProducts = products.filter(({category}) => category === 'mobile');
+        const filteredWirelessProducts = products.filter(({category}) => category === 'wireless');
         setTrendingProducts(filteredTrendingProducts);
         setBestSalesProducts(filteredBestSalesProducts);
+        setMobileProducts(filteredMobileProducts);
+        setWirelessProducts(filteredWirelessProducts);
     }, [])
     return (
         <Helmet title={'Home'}>
@@ -87,6 +93,17 @@ const Home = () => {
                         <Col lg='6' md='6' className='text-end'>
                             <img src={counterImg} alt='counter-img'/>
                         </Col>
+                    </Row>
+                </Container>
+            </section>
+            <section className='new__arrivals'>
+                <Container>
+                    <Row>
+                        <Col lg='12' className='text-center'>
+                            <h2 className='section__title'>New Arrivals</h2>
+                        </Col>
+                        <Products data={mobileProducts} />
+                        <Products data={wirelessProducts} />
                     </Row>
                 </Container>
             </section>
