@@ -27,7 +27,7 @@ const ProductCard = ({item}) => {
                 </div>
                 <div className='p-2 product__info'>
                     <h3 className='product__name'>
-                        <Link to={`/shop/${id}`}>Modern Armchair</Link>
+                        <Link to={`/shop/${id}`}>{productName}</Link>
                     </h3>
                     <span>{category}</span>
                 </div>
