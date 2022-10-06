@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './ProductDetails.css';
 import Helmet from "../../components/Helmet";
 import CommonSection from "../../components/UI/CommonSection";
@@ -7,6 +7,9 @@ import {useParams} from "react-router-dom";
 import products from "../../assets/data/products";
 import {motion} from "framer-motion";
 import Products from "../../components/UI/Products";
+import {useDispatch} from "react-redux";
+import {cartActions} from "../../redux/slices/cartSlice";
+import {toast} from "react-toastify";
 
 
 const ProductDetails = () => {
@@ -15,7 +18,7 @@ const ProductDetails = () => {
 
     const reviewUser = useRef('');
     const reviewMsg = useRef('');
-
+    const dispatch = useDispatch();
 
     const {id} = useParams();
 
@@ -29,7 +32,21 @@ const ProductDetails = () => {
 
         const reviewUserName = reviewUser.current.value;
         const reviewUserMsg = reviewMsg.current.value;
-    }
+
+        console.log(reviewUserName, reviewUserMsg, rating);
+    };
+    const addToCart = () => {
+        dispatch(cartActions.addItem({
+            id,
+            image: imgUrl,
+            productName,
+            price
+        }));
+        toast.success(`Product ${productName} added to cart`)
+    };
+    useEffect(()=>{
+        window.scrollTo(0,0);
+    }, [product]);
     return (
         <Helmet title={productName}>
             <CommonSection title={productName}/>
@@ -58,7 +75,7 @@ const ProductDetails = () => {
                                     <span>Category: {category.toUpperCase()}</span>
                                 </div>
                                 <p className='mt-3'>{shortDesc}</p>
-                                <motion.button whileTap={{scale: 1.2}} className='buy__btn'>Add to Cart</motion.button>
+                                <motion.button whileTap={{scale: 1.2}} className='buy__btn' onClick={addToCart}>Add to Cart</motion.button>
                             </div>
                         </Col>
                     </Row>
@@ -102,7 +119,7 @@ const ProductDetails = () => {
                                                 <div className='form__group'>
                                                     <input type='text' placeholder='Enter name' ref={reviewUser}/>
                                                 </div>
-                                                <div className='form__group d-flex align-items-center gap-5'>
+                                                <div className='form__group d-flex align-items-center gap-5 rating__group'>
                                                    <span onClick={()=>setRating(1)}>1<i className='ri-star-s-fill'></i></span>
                                                    <span onClick={()=>setRating(2)}>2<i className='ri-star-s-fill'></i></span>
                                                    <span onClick={()=>setRating(3)}>3<i className='ri-star-s-fill'></i></span>
