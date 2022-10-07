@@ -33,7 +33,13 @@ const ProductDetails = () => {
         const reviewUserName = reviewUser.current.value;
         const reviewUserMsg = reviewMsg.current.value;
 
-        console.log(reviewUserName, reviewUserMsg, rating);
+        const reviewObj = {
+            userName: reviewUserName,
+            text: reviewUserMsg,
+            rating,
+        };
+        toast.success('Review submitted');
+
     };
     const addToCart = () => {
         dispatch(cartActions.addItem({
@@ -120,11 +126,11 @@ const ProductDetails = () => {
                                                     <input type='text' placeholder='Enter name' ref={reviewUser}/>
                                                 </div>
                                                 <div className='form__group d-flex align-items-center gap-5 rating__group'>
-                                                   <span onClick={()=>setRating(1)}>1<i className='ri-star-s-fill'></i></span>
-                                                   <span onClick={()=>setRating(2)}>2<i className='ri-star-s-fill'></i></span>
-                                                   <span onClick={()=>setRating(3)}>3<i className='ri-star-s-fill'></i></span>
-                                                   <span onClick={()=>setRating(4)}>4<i className='ri-star-s-fill'></i></span>
-                                                   <span onClick={()=>setRating(5)}>5<i className='ri-star-s-fill'></i></span>
+                                                   <motion.span whileHover={{scale: 1.2}} onClick={()=>setRating(1)}>1<i className='ri-star-s-fill'></i></motion.span>
+                                                   <motion.span whileHover={{scale: 1.2}} onClick={()=>setRating(2)}>2<i className='ri-star-s-fill'></i></motion.span>
+                                                   <motion.span whileHover={{scale: 1.2}} onClick={()=>setRating(3)}>3<i className='ri-star-s-fill'></i></motion.span>
+                                                   <motion.span whileHover={{scale: 1.2}} onClick={()=>setRating(4)}>4<i className='ri-star-s-fill'></i></motion.span>
+                                                   <motion.span whileHover={{scale: 1.2}} onClick={()=>setRating(5)}>5<i className='ri-star-s-fill'></i></motion.span>
                                                 </div>
                                                 <div className='form__group'>
                                                     <textarea ref={reviewMsg} rows={4} type='text' placeholder='Review Message...'/>
